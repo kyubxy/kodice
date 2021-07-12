@@ -2,7 +2,7 @@ package com.epictofu;
 
 import java.util.*;
 
-public class Kodice {
+public class Game {
     public boolean Debug = true;
 
     Score score = new Score(0);
@@ -18,7 +18,7 @@ public class Kodice {
 
     Random rand;
 
-    public Kodice ()
+    public Game()
     {
         init();
         /*
@@ -38,6 +38,7 @@ public class Kodice {
         */
     }
 
+    // C
     // set up variables and scoring etc..
     void init()
     {
@@ -72,6 +73,7 @@ public class Kodice {
         quadScoring.put ("O", new Score (4));
     }
 
+    // V
     // print scores and other game information
     public void printInformation()
     {
@@ -83,12 +85,14 @@ public class Kodice {
         System.out.println("Dice left: " + Integer.toString (numDice));
     }
 
+    // T
     public void Debug (String msg)
     {
         if (Debug)
             System.out.println("DEBUG: " + msg);
     }
 
+    // G
     // simulate a roll
     public void roll ()
     {
