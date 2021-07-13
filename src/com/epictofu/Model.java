@@ -28,14 +28,15 @@ public class Model {
         singleDiceScoring.put ("CHI", new Score(0,0,500));
         singleDiceScoring.put ("N", new Score(50));
         singleDiceScoring.put ("KO", new Score (100));
-        singleDiceScoring.put ("O", new Score (30));
+        singleDiceScoring.put ("O", new Score (300));
 
         wordsScoring.put ("UNCHI",new Score (1000, 0,  0));
         wordsScoring.put ("UNKO", new Score (1000, 0,  0));
         wordsScoring.put ("MANKO", new Score (0, 1000, 0));
-        wordsScoring.put ("OMANKO",new Score (0, 5000, 0));
+        wordsScoring.put ("OMANKO",new Score (0, 4000, 0));
         wordsScoring.put ("CHINKO", new Score (0,0,1000));
         wordsScoring.put ("CHINCHIN", new Score (3000));
+        wordsScoring.put ("OCHINCHIN", new Score (7000));
 
         tripletScoring.put ("U", new Score (2,1,1));
         tripletScoring.put ("MA", new Score (1, 2,1));
@@ -93,11 +94,20 @@ public class Model {
     // update how many extra dice the player gets after rolling
     public void updateRollsAndDice (List <String> results)
     {
-        var words = getAllWords(results).size();
-        if (words > 0)
-            numDice += words;
-        else
-            rolls --;
+        var words = getAllWords(results);
+        if (words.size() > 0) {
+            if (words.contains ("OCHINCHIN"))
+                numDice = 10;
+            else {
+                if (numDice < 10)
+                    numDice++;
+            }
+        }
+        else {
+            rolls--;
+            if (numDice > 5)
+                numDice --;
+        }
     }
 
     // applies multipliers to the actual score
@@ -110,7 +120,7 @@ public class Model {
         for (String x : tripletScoring.keySet())
         {
             List <String> copy = new ArrayList<String>(results);
-            copy.removeIf (y -> y.equals(x));
+            copy.removeIf (y -> !y.equals(x));
 
             if (copy.size() == 3)
             {
@@ -169,10 +179,11 @@ public class Model {
         return output;
     }
 
-    // test if two strings are subsets of each other
+    // test if two strings are subsets of each other and if they are of same length
+    // XXX: not really a double inclusion in the mathematical sense
     static boolean doubleInclusion (String s1, String s2)
     {
-        return isSubset(s1, s2) && isSubset(s2, s1);
+        return isSubset(s1, s2) && isSubset(s2, s1) && s1.length() == s2.length();
     }
 
     // test if string a is a subset of string b
