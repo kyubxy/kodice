@@ -63,7 +63,6 @@ public class Model {
             var result = dice[rand.nextInt(dice.length)];
             results.add(result);
         }
-        // TODO: add piss
 
         return results;
 

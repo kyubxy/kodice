@@ -40,7 +40,7 @@ public class Controller {
         System.out.println ("Results");
         System.out.println (results);
 
-        // calculate results?
+        // calculate results
         model.updateScore(results);
         model.applyMultipliers(results);
         model.updateRollsAndDice (results);
