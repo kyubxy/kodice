@@ -38,17 +38,45 @@ public class Score
        this.c += s.c;
    }
 
-   public static Score modScore (Score s)
-   {
-        return new Score(mod(s.u), mod(s.m), mod(s.c));
-   }
+    public void modScore ()
+    {
+        u = mod (u);
+        m = mod (m);
+        c = mod (c);
+    }
 
-   public static Double mod (Double n)
-   {
-       if (n < 0)
-           n *= -1;
+    private Double mod (Double n)
+    {
+        if (n < 0)
+            n *= -1;
 
-       return n;
+        return n;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Total: " + getTotal() +
+               " u: " + Double.toString(u) +
+               " m: " + Double.toString(m) +
+               " c: " + Double.toString(c);
+    }
+
+    @Override
+   public boolean equals (Object o)
+   {
+       // If the object is compared with itself then return true
+       if (o == this) {
+           return true;
+       }
+
+       if (!(o instanceof Score)) {
+           return false;
+       }
+
+       Score c = (Score) o;
+
+       return c.toString().equals(toString());
    }
 }
 
