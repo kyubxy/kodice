@@ -1,7 +1,8 @@
 # kodice
 poo dice
 
-# FAQ
+# missing features
 
-## you can't lose any dice during play?
-nope, too lazy to add.
+- Nudging the die
+- Losing die
+- Some other rude words I probably missed
