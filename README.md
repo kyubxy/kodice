@@ -1,5 +1,5 @@
 # kodice
-poo dice
+poo dice, rewritten for the Java console for practice.
 
 # missing features
 
